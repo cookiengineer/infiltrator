@@ -1,0 +1,8 @@
+
+/map/*
+!/map/.gitkeep
+
+/public/meta.json
+/public/map/*
+!/public/map/.gitkeep
+

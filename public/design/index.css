@@ -1,0 +1,42 @@
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+header {
+	display: block;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: auto;
+	left: 0px;
+	margin: 0px;
+	padding: 10px;
+	text-align: right;
+	z-index: 20;
+}
+
+header > button {
+	color: black;
+	background: #fff;
+	margin: 0px;
+	padding: 4px;
+	border: 2px solid rgba(0,0,0,0.2);
+	border-radius: 4px;
+	font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 22px;
+	cursor: pointer;
+	z-index: 21;
+}
+
+#map {
+	display: block;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	z-index: 10;
+}
+
