@@ -8,14 +8,19 @@
 	const META    = {};
 	const LAYERS  = {};
 	const FILTERS = {
-		UPC: {
+		ALL: {
 			state: true,
+			check: entry => true
+		},
+		UPC: {
+			state: false,
 			check: entry => entry.ssid.startsWith('UPC')
 		}
 	};
 
 
 	const header = global.document.querySelector('header');
+	const aside  = global.document.querySelector('aside');
 
 	// TODO: Migrate <header> and <button> mess to this here
 
@@ -91,9 +96,32 @@
 
 			});
 
-
 		}
 
+	};
+
+	let _id = 0;
+
+	global.save = function() {
+
+		leafletImage(MAP, (err, canvas) => {
+
+			let a    = global.document.createElement('a');
+			let dim  = MAP.getSize();
+			let name = 'map-save-' + (_id++) + '.png';
+
+			a.innerHTML = name;
+			a.download  = name;
+			a.href      = canvas.toDataURL('image/png');
+
+			let img  = global.document.createElement('img');
+			// img.width  = dim.x;
+			// img.height = dim.y;
+			// img.src    = canvas.toDataURL('image/png');
+
+			aside.appendChild(a);
+
+		});
 
 	};
 

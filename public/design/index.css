@@ -10,7 +10,7 @@ header {
 	top: 0px;
 	right: 0px;
 	bottom: auto;
-	left: 0px;
+	left: auto;
 	margin: 0px;
 	padding: 10px;
 	text-align: right;
@@ -28,6 +28,19 @@ header > button {
 	font-size: 22px;
 	cursor: pointer;
 	z-index: 21;
+}
+
+aside {
+	display: block;
+	position: fixed;
+	top: 64px;
+	right: 0px;
+	bottom: 0px;
+	left: auto;
+	margin: 0px;
+	padding: 10px;
+	overflow: auto;
+	z-index: 20;
 }
 
 #map {

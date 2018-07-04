@@ -23,6 +23,7 @@ const _ROOT = process.argv[1].split('/').slice(0, -2).join('/');
 
 			tmp += buffer.slice(0, i1 + 1).join('\n') + '\n';
 			tmp += maps.map(path => path.split('/').pop()).map(id => '\t\t\t<button onclick="load(\'' + id + '\');">' + id + '</button>').join('\n') + '\n';
+			tmp += '\t\t\t<button onclick="save();">Save</button>\n';
 			tmp += buffer.slice(i2).join('\n');
 
 			_fs.writeFileSync(_ROOT + '/public/index.html', tmp);
@@ -142,7 +143,7 @@ const _ROOT = process.argv[1].split('/').slice(0, -2).join('/');
 
 					} else if (cache !== undefined) {
 
-						if (entry.accuracy >= cache.accuracy) {
+						if (entry.accuracy <= cache.accuracy) {
 
 							if (entry.rssi < 0 && cache.rssi < 0) {
 
