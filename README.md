@@ -24,7 +24,7 @@ you previously selected while generating the Offline Map.
 
 ```json
 {
-	"name": "<name>"
+	"name": "<name>",
 	"center": [
 		50.0001,
 		13.3337
