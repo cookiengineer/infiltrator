@@ -49,7 +49,7 @@
 
 		} else if (meta !== null) {
 
-			let layer = L.tileLayer('map/' + id + '/{z}/{x}/{y}.png', {
+			let layer = L.tileLayer('./map/' + id + '/{z}/{x}/{y}.png', {
 				minZoom: meta.zoom[0],
 				maxZoom: meta.zoom[1]
 			});
@@ -128,7 +128,7 @@
 
 	global.addEventListener('DOMContentLoaded', _ => {
 
-		fetch('./meta.json').then(raw => raw.json()).then(data => {
+		fetch('./index.json').then(raw => raw.json()).then(data => {
 
 			for (let id in data) {
 				META[id] = data[id];

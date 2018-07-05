@@ -1,24 +1,30 @@
 
 # Instructions
 
-## Generate Offline Map
+## 1. Generate Offline Map
 
-Download the `mobac` tool, select your map for offline usage and
-export the atlas. The exported atlas will be a `Layer.osz` file
-that you need to extract into the `map/<name>` folder, so that
-the `map/<name>/Manifest.txt` file exists at this location.
+Install the `mobac` (Mobile Atlas Creator) on your system and
+follow the [MOBAC Guide](./guide/MOBAC.md). After you've done
+that, continue here.
+
+
+## 2. Integrate Offline Map
 
 Create the `map/<name>/meta.json` file with the following structure,
-while replacing it with the correct values.
+while replacing it with the correct values. Note that the `name` in
+in the JSON file has to be identical as the named folder.
 
 Set the `center` of the map to the geolocation center of the city
-you already exported into the OSM Map before.
+you already exported into the OSM Map before. You can search that
+via Google by entering "geolocation <City>".
 
 Set the `zoom` to the minimum and maximum value of the zoom levels
-that are also contained in the map's `Manifest.txt` file.
+that are also contained in the map's `Manifest.txt` file and that
+you previously selected while generating the Offline Map.
 
 ```json
 {
+	"name": "<name>"
 	"center": [
 		50.0001,
 		13.3337
@@ -30,23 +36,49 @@ that are also contained in the map's `Manifest.txt` file.
 }
 ```
 
-## Import Wigle Wifi Data
+
+## 3. Import Wigle Wifi Data
 
 On your smartphone, open up the `Wigle` app and go to `Database` and
-press the `CSV EXPORT DB` button. This might take a while (up to a
-couple minutes).
+press the `CSV EXPORT DB` button. This might take a while depending
+on how many Wi-Fis you've logged already.
 
-Transfer the file to your computer and move it to the `map/WigleWifi*.csv`
-file.
+Transfer the file to your computer and move it to the `./map` folder,
+so that it is located at `./map/WigleWifi*.csv`.
 
 
-## 3. Run ./configure.sh
+## 4. Run ./bin/configure.js
 
 The configure script will now import the Offline Map and the Wigle log,
-and generate the ready-to-use application.
+and generate the ready-to-use application. This might also take a while,
+as it has to process every single log entry line-by-line (and recorrect
+previous log entries thereof).
+
+Afterwards there should be a `wifi.json` file existing in every `./map/<name>`
+folder containing a large JSON with the recorrected point of interests.
+
+
+## 5. Start the App
+
+Now you can just startup a web server to serve the `/path/to/infiltrator`
+root folder and you can visit the web app. Note that it must load a shitload
+of images, so try testing it locally first.
+
+```bash
+cd /path/to/infiltrator;
+
+python -m http.server 1337;
+```
+
+Et voila, now you can select some maps and regions and you can see which
+Wi-Fis you've owned.
+
+![10-infiltrator-app](./guide/10-infiltrator-app.jpg)
 
 
 # TODO
 
-- ./bin/configure.js script should move / copy recursively the map folders
-  to the ./public/map/* paths after wifi.json was generated.
+- Calculate bounding boxes correctly depending on the `Manifest.txt` file.
+  Currently, I have no effing clue how the math behind OSZ format looks like,
+  as the wiki article gives totally inaccurate information on that.
+

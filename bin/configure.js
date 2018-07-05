@@ -12,7 +12,7 @@ const _ROOT = process.argv[1].split('/').slice(0, -2).join('/');
 
 	const _generate_index = function(meta, maps) {
 
-		let index  = _fs.readFileSync(_ROOT + '/public/index.html');
+		let index  = _fs.readFileSync(_ROOT + '/index.html');
 		let buffer = index.toString('utf8').split('\n');
 
 		let i1 = buffer.findIndex(line => line.trim() === '<header>');
@@ -26,7 +26,7 @@ const _ROOT = process.argv[1].split('/').slice(0, -2).join('/');
 			tmp += '\t\t\t<button onclick="save();">Save</button>\n';
 			tmp += buffer.slice(i2).join('\n');
 
-			_fs.writeFileSync(_ROOT + '/public/index.html', tmp);
+			_fs.writeFileSync(_ROOT + '/index.html', tmp);
 
 		}
 
@@ -49,8 +49,8 @@ const _ROOT = process.argv[1].split('/').slice(0, -2).join('/');
 			let lat = data.center[0] || 0;
 			let lng = data.center[1] || 0;
 			let bbox = {
-				min: [ lat - 0.1, lng - 0.1 ],
-				max: [ lat + 0.1, lng + 0.1 ]
+				min: [ lat - 0.15, lng - 0.15 ],
+				max: [ lat + 0.15, lng + 0.15 ]
 			};
 
 			meta[id] = {
@@ -63,7 +63,7 @@ const _ROOT = process.argv[1].split('/').slice(0, -2).join('/');
 
 		});
 
-		_fs.writeFileSync(_ROOT + '/public/meta.json', JSON.stringify(meta, null, '\t'));
+		_fs.writeFileSync(_ROOT + '/index.json', JSON.stringify(meta, null, '\t'));
 
 	};
 
@@ -230,8 +230,6 @@ const _ROOT = process.argv[1].split('/').slice(0, -2).join('/');
 		let csvs = DATASET.csvs;
 		if (csvs.length > 0) {
 			_generate_wifi(meta, csvs);
-			// TODO: Copy maps recursively to /public/map/* folders
-			// _generate_map(meta, csvs);
 		}
 
 	}, 500);
